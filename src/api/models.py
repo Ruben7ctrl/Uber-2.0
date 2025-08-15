@@ -101,10 +101,10 @@ class User(db.Model):
             "created_at": self.created_at.isoformat(),
             "updated_at": self.updated_at.isoformat()
         }
-        if isinstance(self, Driver):
-            base["documents"] = [doc.serialize() for doc in self.documents]
-            base["vehicle"] = self.vehicle.serialize() if self.vehicle else None
-        return base
+        # if isinstance(self, Driver):
+        #     base["documents"] = [doc.serialize() for doc in self.documents]
+        #     base["vehicle"] = self.vehicle.serialize() if self.vehicle else None
+        # return base
 
     def _subscriber_hash(self) -> str:
         return hashlib.md5(self.email.lower().encode('utf-8')).hexdigest()
