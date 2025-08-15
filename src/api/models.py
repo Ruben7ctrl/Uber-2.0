@@ -17,6 +17,27 @@ from mailchimp3 import MailChimp
 
 db = SQLAlchemy()
 
+# =========================================================
+# TABLAS PIVOTE
+# =========================================================
+
+roles_users = Table(
+    "roles_users", db.metadata,
+    mapped_column("role_id", ForeignKey("roles.id"), primary_key=True),
+    mapped_column("user_id", ForeignKey("users.id"), primary_key=True)
+)
+
+roles_permissions = Table(
+    "roles_permissions", db.metadata,
+    mapped_column("role_id", ForeignKey("roles.id"), primary_key=True),
+    mapped_column("permission_id", ForeignKey("permissions.id"), primary_key=True)
+)
+
+ride_extras_pivot = Table(
+    "ride_extras_pivot", db.metadata,
+    mapped_column("ride_id", ForeignKey("rides.id"), primary_key=True),
+    mapped_column("extra_id", ForeignKey("ride_extras.id"), primary_key=True)
+)
 
 # =========================================================
 # MODELOS DE USUARIO Y AUTENTICACIÓN
