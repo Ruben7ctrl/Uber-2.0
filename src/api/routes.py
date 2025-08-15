@@ -25,7 +25,7 @@ def handle_hello():
 # users_bp = Blueprint("users_bp", __name__, url_prefix="/users")
 
 
-@api.route("/", methods=["GET"])
+@api.route("/users", methods=["GET"])
 def list_users():
     role = request.args.get("role")
     page = request.args.get("page", type=int, default=1)
@@ -46,7 +46,7 @@ def list_users():
     })
 
 
-@api.route("/", methods=["POST"])
+@api.route("/users", methods=["POST"])
 def create_user():
     data = request.get_json()
     name = data.get("name")
@@ -75,13 +75,13 @@ def create_user():
     return jsonify(user.serialize()), 201
 
 
-@api.route("/<int:user_id>", methods=["GET"])
+@api.route("/user/<int:user_id>", methods=["GET"])
 def get_user(user_id):
     user = User.query.get_or_404(user_id)
     return jsonify(user.serialize())
 
 
-@api.route("/<int:user_id>/role", methods=["PUT"])
+@api.route("/user/<int:user_id>/role", methods=["PUT"])
 def change_role(user_id):
     data = request.get_json()
     new_role = data.get("role")
@@ -93,7 +93,7 @@ def change_role(user_id):
     return jsonify({"message": f"Role updated to {new_role}"}), 200
 
 
-@api.route("/<int:user_id>", methods=["DELETE"])
+@api.route("/user/<int:user_id>", methods=["DELETE"])
 def delete_user(user_id):
     user = User.query.get_or_404(user_id)
     db.session.delete(user)
