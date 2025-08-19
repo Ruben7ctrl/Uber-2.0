@@ -22,7 +22,8 @@ class RideExtraSchema(Schema):
     price = fields.Decimal(
         required=True,
         as_string=True,       # Se serializa como string (recomendado para dinero)
-        places=2,             # 2 decimales
+        places=2,             # 2 decimales, 200
+        
         rounding=ROUND_HALF_UP,
         allow_nan=False,
         validate=validate.Range(min=PRICE_MIN, error="El precio debe ser mayor o igual a 0."),
