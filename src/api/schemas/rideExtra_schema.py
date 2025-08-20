@@ -22,7 +22,7 @@ class RideExtraSchema(Schema):
     price = fields.Decimal(
         required=True,
         as_string=True,       # Se serializa como string (recomendado para dinero)
-        places=2,             # 2 decimales, 200
+        places=2,             # 2 decimales
         
         rounding=ROUND_HALF_UP,
         allow_nan=False,
